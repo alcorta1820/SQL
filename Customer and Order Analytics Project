@@ -1,0 +1,69 @@
+--How many orders were placed in January?
+--Remember to filter out the blank and incorrect order IDs like we did in the "dealing with messy data" section of the previous lesson!
+
+select count(orderID)
+from bit_db.jansales
+where length(orderId) = 6
+and orderID <> "Order ID";
+
+
+
+--How many of those orders were for an iPhone?
+
+select count(quantity)
+from bit_db.jansales
+where product = "iPhone"
+and length(orderid) = 6
+and orderid<> "Order Id";
+
+
+--Select the customer account numbers for all the orders that were placed in February.
+
+select distinct acctnum
+from bit_db.customers as cust
+inner join bit_db.febsales as feb
+on cust.order_id = feb.orderid
+where length(orderId) = 6
+and orderID <> "Order ID";
+
+
+
+--Which product was the cheapest one sold in January, and what was the price?
+
+select distinct product, min(price)
+from bit_db.JanSales
+group by product,price
+order by price ASC limit 1;
+
+
+
+--What is the total revenue for each product sold in January?
+--(Revenue can be calculated using the number of products sold and the price of the products).
+
+select product, sum(quantity)*price as revenue
+from bit_db.JanSales
+group by product
+order by revenue DESC;
+
+
+
+
+
+--Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+
+select product, sum(quantity), sum(quantity)*price as revenue
+from bit_db.FebSales
+where location = "548 Lincoln St, Seattle, WA 98101"
+group by product;
+
+
+
+--How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+
+select product, count(distinct cust.acctnum), avg(quantity*price)
+from bit_db.FebSales as feb
+left join bit_db.customers as cust
+on feb.orderid = cust.order_id
+where feb.quantity > 2
+and length(orderid) = 6
+and orderid <> "Order ID";
