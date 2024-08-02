@@ -1,7 +1,6 @@
 #In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data.
 
 --How many orders were placed in January?
---Remember to filter out the blank and incorrect order IDs like we did in the "dealing with messy data" section of the previous lesson!
 
 select count(orderID)
 from bit_db.jansales
@@ -40,7 +39,6 @@ order by price ASC limit 1;
 
 
 --What is the total revenue for each product sold in January?
---(Revenue can be calculated using the number of products sold and the price of the products).
 
 select product, sum(quantity)*price as revenue
 from bit_db.JanSales
