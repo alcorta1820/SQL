@@ -76,3 +76,12 @@ select Product, SUM(quantity)
 from BIT_DB.FebSales
 where location like '%Los Angeles%'
 group by Product;
+
+
+
+--List all the products sold in Los Angeles in February, and include how many of each were sold.
+
+select product, sum(quantity) 
+from bit_db.febsales
+where location like "%Los Angeles%"
+Group by product;
