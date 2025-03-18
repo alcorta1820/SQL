@@ -170,7 +170,7 @@ ORDER BY "Total Sales" DESC
 LIMIT 1;
 
 
---18. --18. Who and when was the last employee hired?
+--18. Who and when was the last employee hired?
 
 select FirstName, LastName, HireDate
 from chinook.employees
